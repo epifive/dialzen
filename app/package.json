@@ -1,0 +1,49 @@
+{
+  "name": "dialzen",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "predev": "node scripts/build-widget.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/build-widget.mjs",
+    "build": "next build",
+    "start": "next start",
+    "start:server": "node server.js",
+    "worker": "node scripts/worker.mjs",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "widget:build": "node scripts/build-widget.mjs",
+    "vendor:voice-sdk": "node scripts/vendor-voice-sdks.mjs"
+  },
+  "dependencies": {
+    "kysely": "^0.29.6",
+    "lucide-react": "^1.57.0",
+    "marked": "^18.1.1",
+    "mysql2": "^3.24.6",
+    "next": "16.4.1",
+    "nodemailer": "^10.1.1",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "server-only": "^0.0.1",
+    "stripe": "^23.0.0",
+    "undici": "^8.12.1",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^22.20.5",
+    "@types/nodemailer": "^8.0.2",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "esbuild": "^0.28.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "description": "Dialzen - AI voice call agent SaaS built with Next.js",
+  "engines": {
+    "node": ">=20.9.0"
+  }
+}

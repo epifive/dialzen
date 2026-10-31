@@ -1,0 +1,27 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Runtime data (database, uploads, installer config)
+app/storage/*
+!app/storage/.gitkeep
+
+# Generated packages and intermediate renders
+dist/
+marketing/raw/
+marketing/out/
+marketing/demo-storage/
+
+# Local environment and tooling
+.env*
+!.env.example
+.claude/
+.vercel/
+*.log
+.DS_Store
+Thumbs.db
+app/AGENTS.md

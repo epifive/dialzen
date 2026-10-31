@@ -1,0 +1,8 @@
+node_modules
+.next
+storage/*
+!storage/.gitkeep
+AGENTS.md
+*.tsbuildinfo
+.env*
+!.env.example

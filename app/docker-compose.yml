@@ -1,0 +1,43 @@
+# Dialzen with MySQL. Start with: docker compose up -d
+# Then open http://localhost:3000 and choose MySQL in the installer:
+#   host: db   port: 3306   database: dialzen   user: dialzen   password: dialzen
+# Set CRON_SECRET (e.g. in a .env file next to this file) to a long random string:
+# the worker uses it to run the background jobs (campaign dialing, call reconciliation,
+# recordings, retention, housekeeping) every 15 seconds.
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      CRON_SECRET: ${CRON_SECRET:?Set CRON_SECRET in a .env file next to docker-compose.yml}
+    volumes:
+      - storage:/app/storage
+    depends_on:
+      - db
+
+  worker:
+    build: .
+    restart: unless-stopped
+    command: ["node", "scripts/worker.mjs"]
+    environment:
+      WORKER_URL: http://app:3000
+      CRON_SECRET: ${CRON_SECRET:?Set CRON_SECRET in a .env file next to docker-compose.yml}
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: dialzen
+      MYSQL_USER: dialzen
+      MYSQL_PASSWORD: dialzen
+      MYSQL_ROOT_PASSWORD: change-me
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  storage:
+  mysql:

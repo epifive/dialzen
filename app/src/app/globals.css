@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+/* Scripts with tall marks above / below the letters (Devanagari, Bengali, Arabic, Thai …):
+   big headings get a looser line-height and no negative letter-spacing there. */
+@custom-variant tall-script (&:is(:lang(hi), :lang(mr), :lang(ne), :lang(bn), :lang(ar), :lang(fa), :lang(ur), :lang(th)));
+
+/*
+ * Design tokens.
+ * --primary is injected from Admin → Appearance (see app/layout.tsx);
+ * every other brand shade is derived from it with color-mix().
+ */
+:root {
+  --primary: #a21caf;
+  --paper: #f5f7fb;
+  --surface: #ffffff;
+  --ink: #141a24;
+  --muted: #5b6575;
+  --line: #dde3ec;
+  --primary-text: var(--primary);
+  --grid: color-mix(in oklab, var(--primary) 9%, transparent);
+  --marker: #f2c94c;
+}
+
+.dark {
+  --paper: #0d121a;
+  --surface: #141b25;
+  --ink: #e7ecf3;
+  --muted: #98a3b4;
+  --line: #253041;
+  --primary-text: color-mix(in oklab, var(--primary) 60%, white);
+  --grid: color-mix(in oklab, var(--primary) 16%, transparent);
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-strong: color-mix(in oklab, var(--primary) 82%, black);
+  --color-primary-soft: color-mix(in oklab, var(--primary) 11%, transparent);
+  --color-primary-line: color-mix(in oklab, var(--primary) 35%, transparent);
+  --color-primary-text: var(--primary-text);
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-marker: var(--marker);
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-face), var(--font-body), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Landing page motion. Pair with motion-reduce:animate-none. */
+  --animate-tz-rise: tz-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  --animate-tz-pop: tz-pop 0.6s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+  --animate-tz-float: tz-float 7s ease-in-out infinite;
+}
+
+@keyframes tz-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes tz-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94);
+  }
+}
+
+@keyframes tz-float {
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Dark theme: brand-coloured text uses the lighter --primary-text (a deep brand colour such as
+   fuchsia is too dim on the dark surfaces). Buttons keep --primary as their background. */
+.dark .text-primary {
+  color: var(--primary-text);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    /* Decorative shapes must never make phones scroll sideways. */
+    overflow-x: clip;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* User-written text (names, descriptions, incident updates) carries dir="auto" so its punctuation and
+     numbers follow its own language; its alignment still follows the page. */
+  :where(p, h1, h2, h3, h4, div, li, dd, td)[dir="auto"] {
+    text-align: -webkit-match-parent;
+    text-align: match-parent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 25%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* The "cutting mat": a measured grid used behind the hero and tool workspaces. */
+  .mat-grid {
+    background-color: var(--surface);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+    background-position: -1px -1px;
+  }
+
+  .mat-grid-fade {
+    mask-image: linear-gradient(to bottom, black 55%, transparent);
+  }
+
+  /* Long-form content rendered from Markdown (pages, FAQ answers). */
+  .prose-tz {
+    line-height: 1.7;
+    max-width: 68ch;
+  }
+  .prose-tz h2 {
+    font-size: 1.375rem;
+    font-weight: 650;
+    margin: 2rem 0 0.75rem;
+  }
+  .prose-tz h3 {
+    font-size: 1.125rem;
+    font-weight: 650;
+    margin: 1.5rem 0 0.5rem;
+  }
+  .prose-tz p,
+  .prose-tz ul,
+  .prose-tz ol {
+    margin: 0 0 1rem;
+  }
+  .prose-tz ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .prose-tz ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+  .prose-tz a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-tz code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-primary-soft);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
+  }
+  .prose-tz pre {
+    font-family: var(--font-mono);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+  }
+  .prose-tz pre code {
+    background: none;
+    padding: 0;
+  }
+  .prose-tz table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  .prose-tz th,
+  .prose-tz td {
+    border: 1px solid var(--line);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+  .prose-tz blockquote {
+    border-left: 3px solid var(--primary);
+    padding-left: 1rem;
+    color: var(--muted);
+  }
+}
