@@ -55,9 +55,10 @@ More screenshots are in [`marketing/final/screenshots`](marketing/final/screensh
 ## Hosted version & paid installation
 
 Need Dialzen hosted for you, installed on your own server, or customised? Contact
-**[EpiFive](https://www.epifive.com/services)**.
+**[EpiFive](https://www.epifive.com/services#custom-app-development)**.
 
-More open-source projects: https://www.epifive.com/open-source
+- Step-by-step guide: [Dialzen on the EpiFive blog](https://www.epifive.com/blog/dialzen-open-source-ai-voice-agent)
+- More open-source projects: [epifive.com/open-source](https://www.epifive.com/open-source)
 
 ## Quick start
 
