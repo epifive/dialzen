@@ -1,5 +1,14 @@
 # Dialzen
 
+<!-- epifive:header -->
+> Build AI phone agents for inbound support, appointment booking and consented follow-up calls, and run them as your own SaaS.
+
+[![Licence: MIT](https://img.shields.io/badge/licence-MIT-0a7560?style=flat-square)](LICENSE)
+[![Latest release](https://img.shields.io/github/v/release/epifive/dialzen?style=flat-square&label=release&color=4f5bd5)](https://github.com/epifive/dialzen/releases/latest)
+[![GitHub stars](https://img.shields.io/github/stars/epifive/dialzen?style=flat-square&color=b5791b)](https://github.com/epifive/dialzen/stargazers)
+
+**[Docs & guide on epifive.com](https://www.epifive.com/blog/dialzen-open-source-ai-voice-agent?utm_source=github&utm_medium=readme&utm_campaign=dialzen)** · **[Live demo](https://dialzen-demo.vercel.app)** · **[Download the latest release](https://github.com/epifive/dialzen/releases/latest)**
+
 **Open-source AI voice call agent platform — run your own AI phone agent SaaS.** Businesses create
 AI phone agents for inbound support, appointment booking and consented follow-ups. Built with
 Next.js 16, React 19 and Tailwind CSS 4. Runs on a VPS, Docker, cPanel (Node.js) or Vercel, with
@@ -108,3 +117,7 @@ Bug reports and pull requests are welcome — please open an
 
 [MIT](LICENSE) © 2026 EpiFive. The vendored browser SDKs in `app/public/vendor/voice-sdk` keep
 their own licences (see [`LICENSES.txt`](app/public/vendor/voice-sdk/LICENSES.txt)).
+
+---
+
+<p align="center">Made by <b>EpiFive</b> — <a href="https://www.epifive.com/?utm_source=github&utm_medium=readme&utm_campaign=dialzen">www.epifive.com</a> · <a href="https://www.epifive.com/open-source?utm_source=github&utm_medium=readme&utm_campaign=dialzen">more open-source projects</a></p>
